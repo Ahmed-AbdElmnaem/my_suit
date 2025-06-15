@@ -151,7 +151,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ? "انهاء"
                           : "التالي",
                       style: Styles.font18W400.copyWith(
-                        color: ColorManager.mainColor,
+                        color: ColorManager.black,
                       ),
                     ),
                   ),

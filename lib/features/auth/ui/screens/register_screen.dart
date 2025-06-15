@@ -101,7 +101,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           40.0.height,
 
-                          /// Name
                           AppTextFormField(
                             controller: nameController,
                             hintText: "الاسم الكامل",
@@ -117,8 +116,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                             ),
                           ),
                           20.0.height,
-
-                          /// Email
                           AppTextFormField(
                             controller: emailController,
                             hintText: "البريد الإلكتروني",
@@ -135,7 +132,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           20.0.height,
 
-                          /// Password
                           AppTextFormField(
                             controller: passwordController,
                             hintText: "كلمة المرور",
@@ -149,7 +145,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           20.0.height,
 
-                          /// Confirm Password
                           AppTextFormField(
                             controller: confirmPasswordController,
                             hintText: "تأكيد كلمة المرور",
@@ -166,18 +161,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           30.0.height,
 
-                          /// Register Button
                           CustomButton(
                             text: "إنشاء الحساب",
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                // Logic التسجيل
-                              }
+                              if (formKey.currentState!.validate()) {}
                             },
                           ),
                           20.0.height,
 
-                          /// Already Have Account
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
