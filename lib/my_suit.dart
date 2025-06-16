@@ -13,6 +13,7 @@ class MySuit extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData(
+        fontFamily: 'Urbanist',
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
