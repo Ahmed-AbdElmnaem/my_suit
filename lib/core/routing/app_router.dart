@@ -3,7 +3,7 @@ import 'package:my_suit/features/auth/ui/screens/login_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/register_screen.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
 import 'package:my_suit/features/onboarding/ui/onboarding_screen.dart';
-import 'package:my_suit/features/product_details/ui/product_details_screen.dart';
+import 'package:my_suit/features/product_details/ui/screen/product_details_screen.dart';
 import 'package:my_suit/features/splash/ui/screens/splash_screen.dart';
 import 'package:my_suit/layout/main_layout.dart';
 
