@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
+import 'package:my_suit/core/widgets/custom_circle_Icon.dart';
 import 'package:my_suit/features/product_details/ui/widgets/color_selector.dart';
 import 'package:my_suit/features/product_details/ui/widgets/image_slider.dart';
 import 'package:my_suit/features/product_details/ui/widgets/size_selector.dart';
@@ -36,7 +37,7 @@ class ProductDetailsScreen extends StatelessWidget {
               Positioned(
                 top: 40,
                 left: 16,
-                child: _circleIcon(
+                child: CustomCircleIcon(
                   icon: Icons.arrow_back_ios_new,
                   onTap: () => Navigator.pop(context),
                 ),
@@ -46,7 +47,10 @@ class ProductDetailsScreen extends StatelessWidget {
               Positioned(
                 top: 40,
                 right: 16,
-                child: _circleIcon(icon: Icons.favorite_border, onTap: () {}),
+                child: CustomCircleIcon(
+                  icon: Icons.favorite_border,
+                  onTap: () {},
+                ),
               ),
 
               Positioned(
@@ -133,9 +137,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         backgroundColor: Colors.black,
                         text: 'Add to Cart',
                         textColor: Colors.white,
-                        onPressed: () {
-                          // Handle add to cart action
-                        },
+                        onPressed: () {},
                       ),
                     ),
                   ],
@@ -144,21 +146,6 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _circleIcon({required IconData icon, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(30),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.black54,
-        ),
-        child: Icon(icon, color: Colors.white, size: 20),
       ),
     );
   }
