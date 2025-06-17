@@ -8,17 +8,20 @@ import 'package:my_suit/features/product_details/ui/widgets/image_slider.dart';
 import 'package:my_suit/features/product_details/ui/widgets/size_selector.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../home/data/model/suit_model.dart';
+
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.suit});
+
+  final SuitModel suit;
 
   @override
   Widget build(BuildContext context) {
     final colors = [Colors.black, Colors.brown, Colors.blueGrey];
     final sizes = ['S', 'M', 'L', 'XL'];
     final images = [
-      'https://i.pinimg.com/736x/5d/36/ab/5d36ab81838f9debbbc6035b44327e1c.jpg',
-      'https://i.pinimg.com/736x/bf/e9/28/bfe928a68fd3fee348909f1bdf6d5419.jpg',
-    ];
+      suit.image,
+    ]; // If multiple images exist, extend model later.
     final pageController = PageController();
 
     return Scaffold(
@@ -32,27 +35,27 @@ class ProductDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ImageSlider(images: images, controller: pageController),
               ),
-
-              // Back button
               Positioned(
                 top: 40,
                 left: 16,
                 child: CustomCircleIcon(
+                  size: 30,
+                  color: Colors.white,
                   icon: Icons.arrow_back_ios_new,
                   onTap: () => Navigator.pop(context),
                 ),
               ),
-
-              // Favorite icon
               Positioned(
                 top: 40,
                 right: 16,
                 child: CustomCircleIcon(
-                  icon: Icons.favorite_border,
+                  color: suit.isFavorite ? Colors.red : Colors.grey,
+                  size: 30,
+                  icon:
+                      suit.isFavorite ? Icons.favorite : Icons.favorite_border,
                   onTap: () {},
                 ),
               ),
-
               Positioned(
                 bottom: 20,
                 left: 0,
@@ -67,20 +70,11 @@ class ProductDetailsScreen extends StatelessWidget {
                       dotHeight: 10,
                       dotWidth: 10,
                     ),
-                    onDotClicked: (index) {
-                      pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    },
                   ),
                 ),
               ),
             ],
           ),
-
-          // Bottom content
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -92,30 +86,34 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('2-Piece Slim Fit Suit', style: Styles.font20W600),
-                    const SizedBox(height: 8),
-
+                    Text(suit.name, style: Styles.font20W600),
+                    8.0.height,
+                    Text(suit.brand, style: Styles.font14W400),
+                    12.0.height,
+                    Text(
+                      'EGP ${suit.price}',
+                      style: Styles.font20W600.copyWith(color: Colors.black),
+                    ),
+                    10.0.height,
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 20),
-                        6.0.height,
-                        Text('4.5', style: Styles.font14W400),
-                        const SizedBox(width: 6),
+                        const Icon(
+                          Icons.access_time,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                        const SizedBox(width: 4),
                         Text(
-                          '(210 reviews)',
-                          style: Styles.font14W400.copyWith(color: Colors.grey),
+                          'Rental: EGP ${(suit.price * 0.12).toStringAsFixed(0)} / day',
+                          style: Styles.font16W500.copyWith(
+                            color: Colors.black87,
+                          ),
                         ),
                       ],
                     ),
-                    12.0.height,
-                    Text(
-                      'EGP 2,990',
-                      style: Styles.font20W600.copyWith(color: Colors.brown),
-                    ),
                     16.0.height,
-
                     Text(
-                      'A classy slim fit suit perfect for formal occasions.',
+                      suit.type,
                       style: Styles.font14W400.copyWith(
                         color: Colors.grey.shade600,
                       ),

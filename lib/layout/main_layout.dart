@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_suit/features/Wishlist/ui/screen/wish_list_screen.dart';
 import 'package:my_suit/features/category/ui/screen/category_screen.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
 
@@ -12,7 +13,11 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [HomeScreen(), CategoryScreen()];
+  final List<Widget> _screens = [
+    HomeScreen(),
+    CategoryScreen(),
+    WishListScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class _MainLayoutState extends State<MainLayout> {
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.brown,
+        selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [

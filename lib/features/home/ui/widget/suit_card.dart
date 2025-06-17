@@ -13,7 +13,7 @@ class SuitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(Routes.productdetails);
+        context.pushNamed(Routes.productdetails, arguments: suit);
       },
       child: Stack(
         children: [
@@ -62,7 +62,12 @@ class SuitCard extends StatelessWidget {
           Positioned(
             top: 9,
             right: 6,
-            child: CustomCircleIcon(icon: Icons.favorite_border, onTap: () {}),
+            child: CustomCircleIcon(
+              size: 30,
+              icon: Icons.favorite_border,
+              onTap: () {},
+              color: Colors.red,
+            ),
           ),
         ],
       ),

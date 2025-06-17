@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_suit/features/auth/ui/screens/login_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/register_screen.dart';
+import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
 import 'package:my_suit/features/onboarding/ui/onboarding_screen.dart';
 import 'package:my_suit/features/product_details/ui/screen/product_details_screen.dart';
@@ -26,7 +27,13 @@ class AppRouter {
       case Routes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case Routes.productdetails:
-        return MaterialPageRoute(builder: (_) => const ProductDetailsScreen());
+        if (settings.arguments is SuitModel) {
+          final suit = settings.arguments as SuitModel;
+          return MaterialPageRoute(
+            builder: (_) => ProductDetailsScreen(suit: suit),
+          );
+        }
+        return null;
 
       default:
         return MaterialPageRoute(

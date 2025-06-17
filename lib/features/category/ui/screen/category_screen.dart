@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
+import 'package:my_suit/features/category/ui/widgets/custom_card_categroy.dart';
 
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
@@ -89,58 +90,7 @@ class CategoryScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 500),
                   columnCount: 2,
                   child: ScaleAnimation(
-                    child: FadeInAnimation(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF2A2A2A),
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.white10, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black45,
-                              blurRadius: 6,
-                              offset: Offset(2, 2),
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: Image.network(
-                                  cat['image']!,
-                                  fit: BoxFit.cover,
-                                  color: Colors.black.withOpacity(0.3),
-                                  colorBlendMode: BlendMode.darken,
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.6),
-                                  borderRadius: const BorderRadius.vertical(
-                                    bottom: Radius.circular(16),
-                                  ),
-                                ),
-                                child: Text(
-                                  cat['title']!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    child: FadeInAnimation(child: CustomCardCategroy(cat: cat)),
                   ),
                 );
               }, childCount: categories.length),
