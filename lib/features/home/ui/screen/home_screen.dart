@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
 import 'package:my_suit/core/widgets/custom_app_bar.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/widget/category_item.dart';
+import 'package:my_suit/features/home/ui/widget/custom_carousel_slider.dart';
 import 'package:my_suit/features/home/ui/widget/suit_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -82,48 +84,83 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomAppBar(onMenuTap: () {}, onCartTap: () {}),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            AppTextFormField(
-              hintStyle: const TextStyle(color: Colors.black54),
-              suffixIcon: const Icon(Icons.search),
-              backgroundColor: Colors.grey[300],
-              hintText: 'Search for suits',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a search term';
-                }
-                return null;
-              },
-            ),
-            20.0.height,
-            SizedBox(
-              height: 90,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 16),
-                itemBuilder: (_, index) {
-                  final cat = categories[index];
-                  return CategoryItem(
-                    title: cat['title']!,
-                    image: cat['image']!,
-                    onTap: () {},
-                  );
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: AppTextFormField(
+                hintStyle: const TextStyle(color: Colors.black54),
+                suffixIcon: const Icon(Icons.search),
+                backgroundColor: Colors.grey[300],
+                hintText: 'Search for suits',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a search term';
+                  }
+                  return null;
                 },
               ),
             ),
-            20.0.height,
-            Expanded(
-              child: GridView.builder(
-                itemCount: suits.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.65,
+            SliverToBoxAdapter(child: 20.0.height),
+            SliverToBoxAdapter(
+              child: CustomCarouselSlider(
+                imageUrls: [
+                  'https://cdn.shopify.com/s/files/1/0018/2697/9901/files/WEBSITE_BANNERS_4_79b6d392-e279-44db-89d6-33884de2f1ab.png?v=1583338680',
+                  'https://www.bestmenswear.com/Images/Debs/website/2024/DebsBanner24-Mobile-ViewSuits2.jpg',
+                  'https://pbs.twimg.com/media/GGi5_VxWkAAsClE.jpg',
+                ],
+                onTap: (index) {
+                  debugPrint("Clicked on image $index");
+                },
+              ),
+            ),
+            SliverToBoxAdapter(child: 25.0.height),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 90,
+                child: AnimationLimiter(
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 16),
+                    itemBuilder: (_, index) {
+                      final cat = categories[index];
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 500),
+                        child: SlideAnimation(
+                          horizontalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: CategoryItem(
+                              title: cat['title']!,
+                              image: cat['image']!,
+                              onTap: () {},
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                itemBuilder: (_, index) => SuitCard(suit: suits[index]),
+              ),
+            ),
+            SliverToBoxAdapter(child: 20.0.height),
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final suit = suits[index];
+                return AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 400),
+                  columnCount: 2,
+                  child: ScaleAnimation(
+                    child: FadeInAnimation(child: SuitCard(suit: suit)),
+                  ),
+                );
+              }, childCount: suits.length),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.65,
               ),
             ),
           ],

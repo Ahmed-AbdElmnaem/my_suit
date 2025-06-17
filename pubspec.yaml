@@ -47,6 +47,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
   smooth_page_indicator: ^1.2.1
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
@@ -89,8 +90,8 @@ flutter:
   fonts:
     - family: Urbanist
       fonts:
-        - asset: assets/fonts/Urbanist-Regular.ttf
-        - asset: assets/fonts/Urbanist-Bold.ttf
+        - asset: assets/font/Urbanist-Regular.ttf
+
           weight: 700
   #
   # For details regarding fonts from package dependencies,

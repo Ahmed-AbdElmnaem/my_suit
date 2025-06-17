@@ -13,7 +13,6 @@ class SuitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Handle suit card tap
         context.pushNamed(Routes.productdetails);
       },
       child: Stack(
