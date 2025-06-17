@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_suit/features/category/ui/screen/category_screen.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
 
 class MainLayout extends StatefulWidget {
@@ -11,7 +12,7 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [HomeScreen()];
+  final List<Widget> _screens = [HomeScreen(), CategoryScreen()];
 
   @override
   Widget build(BuildContext context) {

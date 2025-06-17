@@ -54,27 +54,30 @@ class HomeScreen extends StatelessWidget {
     {
       'title': 'New Arrivals',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwl4aEtU66RY_2sfsGAVgG2WSRRFvXf2ttw&s',
+          'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
+    },
+    {
+      'title': 'Classic',
+      'image': 'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
     },
     {
       'title': 'Casual',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlFpIPKdx4oHJrYELuUWXe8pKd1-t-CbvtvbTgpssL8gSDW5YOmgWT0YsD6sOxjy6xMQ&usqp=CAU',
-    },
-    {
-      'title': 'Bestsellers',
-      'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEomcYxmmRSnX1lvvD7LsdO_tIjJ9MIcBwTA924ASuizMPH_frrWwiF7q9Ju9SFSdJhLc&usqp=CAU',
+          'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
     },
     {
       'title': 'Formal',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlFpIPKdx4oHJrYELuUWXe8pKd1-t-CbvtvbTgpssL8gSDW5YOmgWT0YsD6sOxjy6xMQ&usqp=CAU',
+          'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
     },
     {
       'title': 'Accessories',
+      'image': 'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
+    },
+    {
+      'title': 'Bestsellers',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlFpIPKdx4oHJrYELuUWXe8pKd1-t-CbvtvbTgpssL8gSDW5YOmgWT0YsD6sOxjy6xMQ&usqp=CAU',
+          'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
     },
   ];
 

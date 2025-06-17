@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_suit/core/theming/styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onMenuTap;
@@ -13,25 +15,41 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       elevation: 2,
       leading: IconButton(
-        icon: const Icon(Icons.menu, color: Colors.black),
+        icon: const Icon(Icons.menu, color: Colors.white),
         onPressed: onMenuTap,
       ),
-      centerTitle: true,
-      title: const Text(
-        'My Suit',
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-          letterSpacing: 1.2,
-        ),
+
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Center(
+            child: Image.asset(
+              "assets/images/png/logo.png",
+              width: 50.w,
+              height: 50.h,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text(
+              'My Suit',
+              style: Styles.font30W500.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ),
+        ],
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+          icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
           onPressed: onCartTap,
         ),
       ],
