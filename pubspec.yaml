@@ -48,6 +48,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   smooth_page_indicator: ^1.2.1
   carousel_slider: ^5.1.1
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

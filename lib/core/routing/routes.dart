@@ -11,4 +11,7 @@ abstract class Routes {
   static const profile = '/profile';
   static const updateProfile = '/updateProfile';
   static const changePassword = '/changePassword';
+  static const wishlist = '/wishlist';
+  static const purchaseScreen = '/purchaseScreen';
+  static const rental = '/rental';
 }

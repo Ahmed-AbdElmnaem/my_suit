@@ -53,14 +53,14 @@ class WishListScreen extends StatelessWidget {
         title: Text(
           'Wishlist',
           style: Styles.font30W500.copyWith(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
             fontSize: 22,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),

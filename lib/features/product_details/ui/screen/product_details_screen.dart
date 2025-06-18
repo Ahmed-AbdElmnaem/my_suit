@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
 import 'package:my_suit/core/widgets/custom_circle_Icon.dart';
@@ -127,16 +128,35 @@ class ProductDetailsScreen extends StatelessWidget {
                     8.0.height,
                     SizeSelector(sizes: sizes),
                     25.0.height,
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: CustomButton(
-                        icon: Icons.shopping_cart_outlined,
-                        backgroundColor: Colors.black,
-                        text: 'Add to Cart',
-                        textColor: Colors.white,
-                        onPressed: () {},
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            icon: Icons.shopping_bag_outlined,
+                            backgroundColor: Colors.black,
+                            text: 'Buy Now',
+                            textColor: Colors.white,
+                            onPressed: () {
+                              context.pushNamed(
+                                Routes.purchaseScreen,
+                                arguments: suit,
+                              );
+                            },
+                          ),
+                        ),
+                        12.0.width,
+                        Expanded(
+                          child: CustomButton(
+                            icon: Icons.calendar_month_outlined,
+                            backgroundColor: Colors.grey.shade700,
+                            text: 'Rent Now',
+                            textColor: Colors.white,
+                            onPressed: () {
+                              context.pushNamed(Routes.rental, arguments: suit);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

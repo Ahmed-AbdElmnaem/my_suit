@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_suit/features/Wishlist/ui/screen/wish_list_screen.dart';
 import 'package:my_suit/features/category/ui/screen/category_screen.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
+import 'package:my_suit/features/profile/ui/screen/profile_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -17,6 +18,7 @@ class _MainLayoutState extends State<MainLayout> {
     HomeScreen(),
     CategoryScreen(),
     WishListScreen(),
+    ProfileScreen(),
   ];
 
   @override
