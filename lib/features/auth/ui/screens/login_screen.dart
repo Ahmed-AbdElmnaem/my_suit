@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
@@ -50,13 +52,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     30.0.height,
                     Text(
-                      "مرحبًا بعودتك!",
+                      LocaleKeys.welcome_back.tr(),
                       style: Styles.font24W600.copyWith(color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                     10.0.height,
                     Text(
-                      "سجل دخولك إلى حسابك",
+                      LocaleKeys.login_to_your_account.tr(),
                       style: Styles.font16W400.copyWith(color: Colors.white70),
                       textAlign: TextAlign.center,
                     ),
@@ -67,12 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.white,
                       ),
                       controller: emailController,
-                      hintText: "البريد الإلكتروني",
+                      hintText: LocaleKeys.email_hint.tr(),
                       keyboardType: TextInputType.emailAddress,
                       validator:
                           (value) =>
                               value!.isEmpty
-                                  ? "من فضلك أدخل بريدك الإلكتروني"
+                                  ? LocaleKeys.email_validator.tr()
                                   : null,
                     ),
                     20.0.height,
@@ -80,11 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       keyboardType: TextInputType.visiblePassword,
                       obsecureText: true,
                       controller: passwordController,
-                      hintText: "كلمة المرور",
+                      hintText: LocaleKeys.password_hint.tr(),
                       validator:
                           (value) =>
                               value!.isEmpty
-                                  ? "من فضلك أدخل كلمة المرور"
+                                  ? LocaleKeys.password_validator.tr()
                                   : null,
                     ),
                     10.0.height,
@@ -95,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // رايح لنسيت كلمة المرور
                         },
                         child: Text(
-                          "نسيت كلمة السر؟",
+                          LocaleKeys.forgot_password.tr(),
                           style: Styles.font14W400.copyWith(
                             color: Colors.white,
                           ),
@@ -104,9 +106,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     30.0.height,
                     CustomButton(
-                      text: "تسجيل الدخول",
+                      text: LocaleKeys.login.tr(),
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {}
+                        if (formKey.currentState!.validate()) {
+                          // login logic
+                        }
                       },
                     ),
                     20.0.height,
@@ -114,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "ما عندكش حساب؟",
+                          LocaleKeys.no_account.tr(),
                           style: Styles.font14W400.copyWith(
                             color: Colors.white70,
                           ),
@@ -124,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             context.pushNamed(Routes.register);
                           },
                           child: Text(
-                            "سجّل الآن",
+                            LocaleKeys.register_now.tr(),
                             style: Styles.font14W400.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

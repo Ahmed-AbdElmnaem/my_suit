@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/features/profile/ui/widgets/custom_circle_image.dart';
@@ -86,28 +88,28 @@ class ProfileScreen extends StatelessWidget {
     final items = [
       ProfileMenuItem(
         icon: Icons.person,
-        title: 'My Account',
+        title: LocaleKeys.my_account.tr(),
         onTap: () {},
         textColor: Colors.white,
         iconColor: Colors.white,
       ),
       ProfileMenuItem(
         icon: Icons.favorite,
-        title: 'Wishlist',
+        title: LocaleKeys.wishlist.tr(),
         onTap: () => context.pushNamed(Routes.wishlist),
         textColor: Colors.white,
         iconColor: Colors.white,
       ),
       ProfileMenuItem(
         icon: Icons.settings,
-        title: 'Settings',
+        title: LocaleKeys.settings.tr(),
         onTap: () {},
         textColor: Colors.white,
         iconColor: Colors.white,
       ),
       ProfileMenuItem(
         icon: Icons.logout,
-        title: 'Logout',
+        title: LocaleKeys.logout.tr(),
         onTap: () {},
         textColor: Colors.white,
         iconColor: Colors.white,

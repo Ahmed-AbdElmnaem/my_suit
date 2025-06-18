@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
@@ -101,13 +103,19 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                         child: CustomButton(
                           icon: Icons.shopping_cart_checkout,
                           backgroundColor: Colors.black,
-                          text: 'Confirm Purchase',
+                          text: LocaleKeys.confirm_purchase.tr(),
                           textColor: Colors.white,
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Purchase Confirmed: $quantity piece(s) - Total EGP ${totalPrice.toStringAsFixed(0)}',
+                                  LocaleKeys.purchase_confirmed.tr(
+                                    namedArgs: {
+                                      'quantity': '$quantity',
+                                      'total':
+                                          'EGP ${totalPrice.toStringAsFixed(0)}',
+                                    },
+                                  ),
                                 ),
                               ),
                             );
@@ -131,7 +139,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Quantity:',
+          LocaleKeys.quantity.tr(),
           style: Styles.font16W500.copyWith(color: Colors.black),
         ),
         Row(
@@ -166,7 +174,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Unit Price:',
+              LocaleKeys.unit_price.tr(),
               style: Styles.font16W500.copyWith(color: Colors.black),
             ),
             Text(
@@ -180,7 +188,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total Price:',
+              LocaleKeys.total_price.tr(),
               style: Styles.font18W400.copyWith(color: Colors.black),
             ),
             Text(

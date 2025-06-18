@@ -1,15 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/widgets/custom_app_bar.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/widget/category_item.dart';
 import 'package:my_suit/features/home/ui/widget/custom_carousel_slider.dart';
+import 'package:my_suit/features/home/ui/widget/custom_drawer.dart';
 import 'package:my_suit/features/home/ui/widget/suit_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<SuitModel> suits = [
     SuitModel(
@@ -50,41 +54,49 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
-  final List<Map<String, String>> categories = [
-    {
-      'title': 'New Arrivals',
-      'image':
-          'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
-    },
-    {
-      'title': 'Classic',
-      'image': 'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
-    },
-    {
-      'title': 'Casual',
-      'image':
-          'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
-    },
-    {
-      'title': 'Formal',
-      'image':
-          'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
-    },
-    {
-      'title': 'Accessories',
-      'image': 'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
-    },
-    {
-      'title': 'Bestsellers',
-      'image':
-          'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> categories = [
+      {
+        'title': LocaleKeys.new_arrivals.tr(),
+        'image':
+            'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
+      },
+      {
+        'title': LocaleKeys.classic.tr(),
+        'image': 'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
+      },
+      {
+        'title': LocaleKeys.casual.tr(),
+        'image':
+            'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
+      },
+      {
+        'title': LocaleKeys.formal.tr(),
+        'image':
+            'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
+      },
+      {
+        'title': LocaleKeys.accessories.tr(),
+        'image': 'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
+      },
+      {
+        'title': LocaleKeys.bestsellers.tr(),
+        'image':
+            'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
+      },
+    ];
+
     return Scaffold(
-      appBar: CustomAppBar(onMenuTap: () {}, onCartTap: () {}),
+      key: _scaffoldKey,
+      drawer: CustomDrawer(
+        onNavigate: (route) {
+          Navigator.of(context).pushNamed(route);
+        },
+      ),
+      appBar: CustomAppBar(
+        onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: CustomScrollView(
@@ -94,10 +106,10 @@ class HomeScreen extends StatelessWidget {
                 hintStyle: const TextStyle(color: Colors.black54),
                 suffixIcon: const Icon(Icons.search),
                 backgroundColor: Colors.grey[300],
-                hintText: 'Search for suits',
+                hintText: LocaleKeys.search_hint.tr(),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a search term';
+                    return LocaleKeys.search_validator.tr();
                   }
                   return null;
                 },

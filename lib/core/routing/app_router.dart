@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_suit/features/Wishlist/ui/screen/wish_list_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/login_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/register_screen.dart';
+import 'package:my_suit/features/category/ui/screen/category_screen.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
 import 'package:my_suit/features/onboarding/ui/onboarding_screen.dart';
@@ -32,6 +33,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case Routes.categorydetails:
+        return MaterialPageRoute(builder: (_) => CategoryScreen());
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.purchaseScreen:

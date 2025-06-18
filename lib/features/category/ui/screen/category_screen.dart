@@ -1,54 +1,40 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
 import 'package:my_suit/features/category/ui/widgets/custom_card_categroy.dart';
 
+import '../../../../core/localization/locale_keys.dart' show LocaleKeys;
+
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
 
-  final List<Map<String, String>> categories = [
-    {
-      'title': 'New Arrivals',
-      'image':
-          'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
-    },
-    {
-      'title': 'Classic',
-      'image': 'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
-    },
-    {
-      'title': 'Casual',
-      'image':
-          'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
-    },
-    {
-      'title': 'Formal',
-      'image':
-          'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
-    },
-    {
-      'title': 'Accessories',
-      'image': 'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
-    },
-    {
-      'title': 'Bestsellers',
-      'image':
-          'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
-    },
+  final List<String> imageUrls = [
+    'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
+    'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
+    'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
+    'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
+    'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
+    'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> categories = [
+      {'title': LocaleKeys.new_arrivals.tr(), 'image': imageUrls[0]},
+      {'title': LocaleKeys.classic.tr(), 'image': imageUrls[1]},
+      {'title': LocaleKeys.casual.tr(), 'image': imageUrls[2]},
+      {'title': LocaleKeys.formal.tr(), 'image': imageUrls[3]},
+      {'title': LocaleKeys.accessories.tr(), 'image': imageUrls[4]},
+      {'title': LocaleKeys.bestsellers.tr(), 'image': imageUrls[5]},
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         title: Text(
-          'Categories',
+          LocaleKeys.categories.tr(),
           style: Styles.font30W500.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -79,7 +65,6 @@ class CategoryScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SliverPadding(
             padding: const EdgeInsets.all(16),
             sliver: SliverGrid(

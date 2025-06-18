@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
@@ -105,9 +107,13 @@ class ProductDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'Rental: EGP ${(suit.price * 0.12).toStringAsFixed(0)} / day',
-                          style: Styles.font16W500.copyWith(
-                            color: Colors.black87,
+                          LocaleKeys.rental_price.tr(
+                            namedArgs: {
+                              'price': (suit.price * 0.12).toStringAsFixed(0),
+                            },
+                          ),
+                          style: Styles.font14W400.copyWith(
+                            color: Colors.grey.shade600,
                           ),
                         ),
                       ],
@@ -120,11 +126,14 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     23.0.height,
-                    Text('Select Color', style: Styles.font16W500),
+                    Text(
+                      LocaleKeys.select_color.tr(),
+                      style: Styles.font16W500,
+                    ),
                     9.0.height,
                     ColorSelector(colors: colors),
                     25.0.height,
-                    Text('Select Size', style: Styles.font16W500),
+                    Text(LocaleKeys.select_size.tr(), style: Styles.font16W500),
                     8.0.height,
                     SizeSelector(sizes: sizes),
                     25.0.height,
@@ -134,7 +143,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           child: CustomButton(
                             icon: Icons.shopping_bag_outlined,
                             backgroundColor: Colors.black,
-                            text: 'Buy Now',
+                            text: LocaleKeys.buy_now.tr(),
                             textColor: Colors.white,
                             onPressed: () {
                               context.pushNamed(
@@ -149,7 +158,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           child: CustomButton(
                             icon: Icons.calendar_month_outlined,
                             backgroundColor: Colors.grey.shade700,
-                            text: 'Rent Now',
+                            text: LocaleKeys.rent_now.tr(),
                             textColor: Colors.white,
                             onPressed: () {
                               context.pushNamed(Routes.rental, arguments: suit);

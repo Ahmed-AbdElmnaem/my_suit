@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/widget/suit_card.dart';
@@ -51,7 +53,7 @@ class WishListScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Wishlist',
+          LocaleKeys.wishlist.tr(),
           style: Styles.font30W500.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
