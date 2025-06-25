@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_suit/features/category/data/model/category_model.dart';
 
 class CustomCardCategroy extends StatelessWidget {
   const CustomCardCategroy({super.key, required this.cat});
 
-  final Map<String, String> cat;
+  final CategoryModel cat;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class CustomCardCategroy extends StatelessWidget {
         color: const Color(0xFF2A2A2A),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white10, width: 1),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(color: Colors.black45, blurRadius: 6, offset: Offset(2, 2)),
         ],
       ),
@@ -21,8 +23,8 @@ class CustomCardCategroy extends StatelessWidget {
           Positioned.fill(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                cat['image']!,
+              child: CachedNetworkImage(
+                imageUrl: cat.image,
                 fit: BoxFit.cover,
                 color: Colors.black.withOpacity(0.3),
                 colorBlendMode: BlendMode.darken,
@@ -40,7 +42,7 @@ class CustomCardCategroy extends StatelessWidget {
                 ),
               ),
               child: Text(
-                cat['title']!,
+                cat.title,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

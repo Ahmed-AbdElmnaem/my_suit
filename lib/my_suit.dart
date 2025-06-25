@@ -16,7 +16,7 @@ class MySuit extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData(
-        fontFamily: 'Urbanist',
+        fontFamily: 'Amiri',
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),

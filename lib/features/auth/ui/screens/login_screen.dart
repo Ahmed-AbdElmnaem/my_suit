@@ -104,13 +104,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
+
                     30.0.height,
                     CustomButton(
                       text: LocaleKeys.login.tr(),
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          // login logic
-                        }
+                        // if (formKey.currentState!.validate()) {
+
+                        // }
+                        context.pushNamed(Routes.layout);
                       },
                     ),
                     20.0.height,

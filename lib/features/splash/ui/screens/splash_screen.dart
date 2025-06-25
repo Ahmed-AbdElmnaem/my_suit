@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     Future.delayed(const Duration(milliseconds: 3500), () {
-      context.pushReplacementNamed(Routes.layout);
+      context.pushReplacementNamed(Routes.onboarding);
     });
   }
 
@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
                   child: SlideTransition(
                     position: _textSlideAnimation,
                     child: Text(
-                      LocaleKeys.appname.tr(),
+                      LocaleKeys.app_name.tr(),
                       style: TextStyle(
                         fontSize: 28.sp,
                         color: Colors.white,

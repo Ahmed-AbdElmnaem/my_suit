@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
 import 'package:my_suit/core/localization/locale_keys.dart';
+import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/widgets/custom_app_bar.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
@@ -24,6 +25,9 @@ class HomeScreen extends StatelessWidget {
       brand: 'HUGO BOSS',
       type: '2-Piece Suit Set',
       price: 6000,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
     SuitModel(
       id: '2',
@@ -33,7 +37,11 @@ class HomeScreen extends StatelessWidget {
       brand: 'ARMANI',
       type: '2-Piece Suit Set',
       price: 3750,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: true,
     ),
+
     SuitModel(
       id: '3',
       name: '3-Piece Suit',
@@ -42,7 +50,11 @@ class HomeScreen extends StatelessWidget {
       brand: 'ZARA',
       type: '3-Piece Suit Set',
       price: 4250,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
+
     SuitModel(
       id: '4',
       name: '3-Piece Suit',
@@ -51,134 +63,212 @@ class HomeScreen extends StatelessWidget {
       brand: 'Ralph Lauren',
       type: '3-Piece Suit Set',
       price: 2500,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> categories = [
+    final List<Map<String, dynamic>> categories = [
       {
         'title': LocaleKeys.new_arrivals.tr(),
         'image':
             'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
+        'products': suits, // كل المنتجات الجديدة
       },
       {
         'title': LocaleKeys.classic.tr(),
         'image': 'https://m.media-amazon.com/images/I/51otI3krjlL._AC_.jpg',
+        'products': suits.where((suit) => suit.type.contains('2')).toList(),
       },
       {
         'title': LocaleKeys.casual.tr(),
         'image':
             'https://www.justinmichaelemmanuel.com/wp-content/uploads/2023/10/casual-suits-for-men-886jin-1.jpg',
+        'products': suits.where((suit) => suit.brand == 'ZARA').toList(),
       },
       {
         'title': LocaleKeys.formal.tr(),
         'image':
             'https://i.pinimg.com/736x/c7/5a/5d/c75a5d12c0811eecb3819819452a0150.jpg',
+        'products': suits.where((suit) => suit.type.contains('3')).toList(),
       },
       {
         'title': LocaleKeys.accessories.tr(),
         'image': 'https://suits.ie/wp-content/uploads/2024/09/139615.jpg',
+        'products': [...suits.where((suit) => suit.type.contains('4'))],
       },
       {
         'title': LocaleKeys.bestsellers.tr(),
         'image':
             'https://cdn.suitsupply.com/image/upload/ar_10:21,b_rgb:efefef,bo_200px_solid_rgb:efefef,c_pad,g_north,w_2600/b_rgb:efefef,c_lfill,g_north,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/Jackets/default/Summer/C25126_1.jpg',
+        'products': suits.take(2).toList(),
       },
     ];
 
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: CustomDrawer(
-        onNavigate: (route) {
-          Navigator.of(context).pushNamed(route);
-        },
-      ),
-      appBar: CustomAppBar(
-        onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: AppTextFormField(
-                hintStyle: const TextStyle(color: Colors.black54),
-                suffixIcon: const Icon(Icons.search),
-                backgroundColor: Colors.grey[300],
-                hintText: LocaleKeys.search_hint.tr(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return LocaleKeys.search_validator.tr();
-                  }
-                  return null;
-                },
-              ),
-            ),
-            SliverToBoxAdapter(child: 20.0.height),
-            SliverToBoxAdapter(
-              child: CustomCarouselSlider(
-                imageUrls: [
-                  'https://cdn.shopify.com/s/files/1/0018/2697/9901/files/WEBSITE_BANNERS_4_79b6d392-e279-44db-89d6-33884de2f1ab.png?v=1583338680',
-                  'https://www.bestmenswear.com/Images/Debs/website/2024/DebsBanner24-Mobile-ViewSuits2.jpg',
-                  'https://pbs.twimg.com/media/GGi5_VxWkAAsClE.jpg',
-                ],
-                onTap: (index) {
-                  debugPrint("Clicked on image $index");
-                },
-              ),
-            ),
-            SliverToBoxAdapter(child: 25.0.height),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 90,
-                child: AnimationLimiter(
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 16),
-                    itemBuilder: (_, index) {
-                      final cat = categories[index];
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 500),
-                        child: SlideAnimation(
-                          horizontalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: CategoryItem(
-                              title: cat['title']!,
-                              image: cat['image']!,
-                              onTap: () {},
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Future.delayed(const Duration(seconds: 2));
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: CustomDrawer(
+          onNavigate: (route) {
+            Navigator.of(context).pushNamed(route);
+          },
+        ),
+        appBar: CustomAppBar(
+          onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
+        ),
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.40,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black,
+                        Colors.black,
+                        Colors.black87,
+                        Colors.black54,
+                        Colors.black12,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(24),
+                      bottomRight: Radius.circular(24),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 12,
+                        offset: Offset(0, 6),
+                      ),
+                    ],
+                  ),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      16.0.height,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: AppTextFormField(
+                          hintStyle: const TextStyle(color: Colors.black54),
+                          suffixIcon: const Icon(Icons.search),
+                          backgroundColor: Colors.grey[200],
+                          hintText: LocaleKeys.search_hint.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return LocaleKeys.search_validator.tr();
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      25.0.height,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: CustomCarouselSlider(
+                              imageUrls: [
+                                'https://cdn.shopify.com/s/files/1/0018/2697/9901/files/WEBSITE_BANNERS_4_79b6d392-e279-44db-89d6-33884de2f1ab.png?v=1583338680',
+                                'https://www.bestmenswear.com/Images/Debs/website/2024/DebsBanner24-Mobile-ViewSuits2.jpg',
+                                'https://pbs.twimg.com/media/GGi5_VxWkAAsClE.jpg',
+                              ],
+                              onTap: (index) {
+                                debugPrint("Clicked on image $index");
+                              },
                             ),
                           ),
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-            SliverToBoxAdapter(child: 20.0.height),
-            SliverGrid(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final suit = suits[index];
-                return AnimationConfiguration.staggeredGrid(
-                  position: index,
-                  duration: const Duration(milliseconds: 400),
-                  columnCount: 2,
-                  child: ScaleAnimation(
-                    child: FadeInAnimation(child: SuitCard(suit: suit)),
+
+              SliverToBoxAdapter(child: 30.0.height),
+
+              /// Categories Section
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SizedBox(
+                    height: 100,
+                    child: AnimationLimiter(
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categories.length,
+                        separatorBuilder: (_, __) => 16.0.width,
+                        itemBuilder: (_, index) {
+                          final cat = categories[index];
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 500),
+                            child: SlideAnimation(
+                              horizontalOffset: 50.0,
+                              child: FadeInAnimation(
+                                child: CategoryItem(
+                                  title: cat['title']!,
+                                  image: cat['image']!,
+                                  onTap: () {
+                                    context.pushNamed(
+                                      Routes.categoryDetails,
+                                      arguments: {
+                                        'title': cat['title'],
+                                        'products': cat['products'],
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
-                );
-              }, childCount: suits.length),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.65,
+                ),
               ),
-            ),
-          ],
+              SliverToBoxAdapter(child: 30.0.height),
+              SliverGrid(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final suit = suits[index];
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 400),
+                    columnCount: 2,
+                    child: ScaleAnimation(
+                      child: FadeInAnimation(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 9.0 / 2,
+                          ),
+                          child: SuitCard(suit: suit, addToCart: false),
+                        ),
+                      ),
+                    ),
+                  );
+                }, childCount: suits.length),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.65,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

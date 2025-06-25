@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
@@ -33,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     icon: Icons.category,
                     title: LocaleKeys.categories.tr(),
-                    onTap: () => context.pushNamed(Routes.categorydetails),
+                    onTap: () => context.pushNamed(Routes.category),
                   ),
                   _buildTile(
                     context,
@@ -83,11 +84,23 @@ class CustomDrawer extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(
-              'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
-            ),
+          CachedNetworkImage(
+            imageUrl:
+                'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
+
+            imageBuilder:
+                (context, imageProvider) =>
+                    CircleAvatar(radius: 40, backgroundImage: imageProvider),
+            placeholder:
+                (context, url) => const CircleAvatar(
+                  radius: 40,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+            errorWidget:
+                (context, url, error) => const CircleAvatar(
+                  radius: 40,
+                  child: Icon(Icons.error, size: 40),
+                ),
           ),
           const SizedBox(height: 12),
           Text(

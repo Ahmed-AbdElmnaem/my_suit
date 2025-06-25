@@ -6,7 +6,7 @@ abstract class Routes {
   static const login = '/login';
   static const forgotPassword = '/forgot-password';
   static const register = '/register';
-  static const categorydetails = '/categorydetails';
+  static const category = '/category';
   static const productdetails = '/productdetails';
   static const profile = '/profile';
   static const updateProfile = '/updateProfile';
@@ -14,4 +14,5 @@ abstract class Routes {
   static const wishlist = '/wishlist';
   static const purchaseScreen = '/purchaseScreen';
   static const rental = '/rental';
+  static const categoryDetails = '/categoryDetails';
 }

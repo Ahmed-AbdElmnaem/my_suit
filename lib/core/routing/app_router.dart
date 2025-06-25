@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_suit/features/Wishlist/ui/screen/wish_list_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/login_screen.dart';
 import 'package:my_suit/features/auth/ui/screens/register_screen.dart';
+import 'package:my_suit/features/category/ui/screen/category_details_screen.dart';
 import 'package:my_suit/features/category/ui/screen/category_screen.dart';
 import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/screen/home_screen.dart';
@@ -33,16 +34,49 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
-      case Routes.categorydetails:
+      case Routes.category:
         return MaterialPageRoute(builder: (_) => CategoryScreen());
+      case Routes.categoryDetails:
+        final args = settings.arguments as Map<String, dynamic>;
+        final title = args['title'] as String;
+        final products = args['products'] as List<SuitModel>;
+        return MaterialPageRoute(
+          builder:
+              (_) => CategoryDetailsScreen(
+                categoryTitle: title,
+                products: products,
+              ),
+        );
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.purchaseScreen:
-        final suit = settings.arguments as SuitModel;
-        return MaterialPageRoute(builder: (_) => PurchaseScreen(suit: suit));
+        final args = settings.arguments as Map<String, Object>;
+        final suit = args['suit'] as SuitModel;
+        final selectedColor = args['selectedColor'] as Color;
+        final selectedSize = args['selectedSize'] as String;
+
+        return MaterialPageRoute(
+          builder:
+              (_) => PurchaseScreen(
+                suit: suit,
+                selectedColor: selectedColor,
+                selectedSize: selectedSize,
+              ),
+        );
       case Routes.rental:
-        final suit = settings.arguments as SuitModel;
-        return MaterialPageRoute(builder: (_) => RentalScreen(suit: suit));
+        final args = settings.arguments as Map<String, Object>;
+        final suit = args['suit'] as SuitModel;
+        final selectedColor = args['selectedColor'] as Color;
+        final selectedSize = args['selectedSize'] as String;
+
+        return MaterialPageRoute(
+          builder:
+              (_) => RentalScreen(
+                suit: suit,
+                selectedColor: selectedColor,
+                selectedSize: selectedSize,
+              ),
+        );
 
       case Routes.productdetails:
         if (settings.arguments is SuitModel) {

@@ -22,7 +22,6 @@
   "login": "تسجيل الدخول",
   "no_account": "ما عندكش حساب؟",
   "register_now": "سجّل الآن" ,
-
   "register_title": "إنشاء حساب جديد",
   "register_subtitle": "املأ البيانات لإنشاء حسابك",
   "full_name_hint": "الاسم الكامل",
@@ -53,7 +52,12 @@
   "price_per_day": "السعر لكل يوم",
   "confirm_rental": "تأكيد الإيجار",
     "change_language": "تغيير اللغة",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+  "days": "يوم",
+  "color": "اللون",
+  "size": "المقاس"
+  , "add_to_cart": "أضف إلى السلة",
+    "no_items_found"  :  "لا يوجد منتجات"
 
 
 }

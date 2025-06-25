@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
+import 'package:my_suit/features/category/data/model/category_model.dart';
 import 'package:my_suit/features/category/ui/widgets/custom_card_categroy.dart';
 
 import '../../../../core/localization/locale_keys.dart' show LocaleKeys;
@@ -21,13 +24,13 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> categories = [
-      {'title': LocaleKeys.new_arrivals.tr(), 'image': imageUrls[0]},
-      {'title': LocaleKeys.classic.tr(), 'image': imageUrls[1]},
-      {'title': LocaleKeys.casual.tr(), 'image': imageUrls[2]},
-      {'title': LocaleKeys.formal.tr(), 'image': imageUrls[3]},
-      {'title': LocaleKeys.accessories.tr(), 'image': imageUrls[4]},
-      {'title': LocaleKeys.bestsellers.tr(), 'image': imageUrls[5]},
+    final List<CategoryModel> categories = [
+      CategoryModel(title: LocaleKeys.new_arrivals.tr(), image: imageUrls[0]),
+      CategoryModel(title: LocaleKeys.classic.tr(), image: imageUrls[1]),
+      CategoryModel(title: LocaleKeys.casual.tr(), image: imageUrls[2]),
+      CategoryModel(title: LocaleKeys.formal.tr(), image: imageUrls[3]),
+      CategoryModel(title: LocaleKeys.accessories.tr(), image: imageUrls[4]),
+      CategoryModel(title: LocaleKeys.bestsellers.tr(), image: imageUrls[5]),
     ];
 
     return Scaffold(
@@ -75,7 +78,17 @@ class CategoryScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 500),
                   columnCount: 2,
                   child: ScaleAnimation(
-                    child: FadeInAnimation(child: CustomCardCategroy(cat: cat)),
+                    child: FadeInAnimation(
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pushNamed(
+                            Routes.categoryDetails,
+                            arguments: {'title': cat.title},
+                          );
+                        },
+                        child: CustomCardCategroy(cat: cat),
+                      ),
+                    ),
                   ),
                 );
               }, childCount: categories.length),

@@ -1,6 +1,6 @@
 class LocaleKeys {
   static const home = 'home';
-  static const appname = 'app_name';
+  static const app_name = 'app_name';
   static const search = 'search';
   static const wishlist = 'wishlist';
   static const cart = 'cart';
@@ -13,10 +13,9 @@ class LocaleKeys {
   static const register = 'register';
   static const email = 'email';
   static const password = 'password';
-  static const confirmPassword = 'confirmPassword';
-  static const forgotPassword = 'forgotPassword';
-  static const resetPassword = 'resetPassword';
-  static const appName = "My Suit";
+  static const confirm_password = 'confirm_password';
+  static const forgot_password = 'forgot_password';
+  static const reset_password = 'reset_password';
   static const search_hint = 'search_hint';
   static const search_validator = 'search_validator';
   static const new_arrivals = 'new_arrivals';
@@ -31,7 +30,6 @@ class LocaleKeys {
   static const email_validator = 'email_validator';
   static const password_hint = 'password_hint';
   static const password_validator = 'password_validator';
-  static const forgot_password = 'forgot_password';
   static const no_account = 'no_account';
   static const register_now = 'register_now';
   static const register_title = 'register_title';
@@ -55,4 +53,14 @@ class LocaleKeys {
   static const unit_price = 'unit_price';
   static const total_price = 'total_price';
   static const change_language = 'change_language';
+  static const confirm_rental = 'confirm_rental';
+  static const start_date = 'start_date';
+  static const rental_duration = 'rental_duration';
+  static const price_per_day = 'price_per_day';
+  static const rental_confirmed = 'rental_confirmed';
+  static const days = 'days';
+  static const color = 'color';
+  static const size = 'size';
+  static const add_to_cart = 'add_to_cart';
+  static const no_items_found = 'no_items_found';
 }

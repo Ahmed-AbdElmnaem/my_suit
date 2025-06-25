@@ -11,8 +11,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PurchaseScreen extends StatefulWidget {
   final SuitModel suit;
+  final Color selectedColor;
+  final String selectedSize;
 
-  const PurchaseScreen({super.key, required this.suit});
+  const PurchaseScreen({
+    super.key,
+    required this.suit,
+    required this.selectedColor,
+    required this.selectedSize,
+  });
 
   @override
   State<PurchaseScreen> createState() => _PurchaseScreenState();
@@ -22,6 +29,9 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
   late final List<String> images;
   final pageController = PageController();
   int quantity = 1;
+
+  late final Color selectedColor = widget.selectedColor;
+  late final String selectedSize = widget.selectedSize;
 
   @override
   void initState() {
@@ -92,6 +102,34 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                         widget.suit.brand,
                         style: Styles.font16W500.copyWith(color: Colors.grey),
                       ),
+                      8.0.height,
+                      Row(
+                        children: [
+                          Text(
+                            '${LocaleKeys.color.tr()}: ',
+                            style: Styles.font16W500.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Container(
+                            width: 18,
+                            height: 18,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: selectedColor,
+                              border: Border.all(color: Colors.black26),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            '${LocaleKeys.size.tr()}: $selectedSize',
+                            style: Styles.font16W500.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+
                       20.0.height,
                       _buildQuantitySelector(),
                       20.0.height,

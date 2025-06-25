@@ -16,7 +16,10 @@ class WishListScreen extends StatelessWidget {
           'https://i.pinimg.com/736x/e1/2d/07/e12d07981ec3276d384b9ad5ebef46c3.jpg',
       brand: 'HUGO BOSS',
       type: '2-Piece Suit Set',
-      price: 299,
+      price: 6000,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
     SuitModel(
       id: '2',
@@ -25,8 +28,12 @@ class WishListScreen extends StatelessWidget {
           'https://i.pinimg.com/736x/bf/e9/28/bfe928a68fd3fee348909f1bdf6d5419.jpg',
       brand: 'ARMANI',
       type: '2-Piece Suit Set',
-      price: 259,
+      price: 3750,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: true,
     ),
+
     SuitModel(
       id: '3',
       name: '3-Piece Suit',
@@ -34,8 +41,12 @@ class WishListScreen extends StatelessWidget {
           'https://i.pinimg.com/736x/79/a3/ce/79a3ceef3a190b65563e46f17cdc6145.jpg',
       brand: 'ZARA',
       type: '3-Piece Suit Set',
-      price: 349,
+      price: 4250,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
+
     SuitModel(
       id: '4',
       name: '3-Piece Suit',
@@ -43,10 +54,12 @@ class WishListScreen extends StatelessWidget {
           'https://i.pinimg.com/736x/5d/36/ab/5d36ab81838f9debbbc6035b44327e1c.jpg',
       brand: 'Ralph Lauren',
       type: '3-Piece Suit Set',
-      price: 399,
+      price: 2500,
+      availableSizes: ['S', 'M', 'L', 'XL'],
+      availableColors: [Colors.black, Colors.grey, Colors.blueGrey],
+      isFavorite: false,
     ),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +114,7 @@ class WishListScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     final suit = suits[index];
-                    return SuitCard(suit: suit);
+                    return SuitCard(suit: suit, addToCart: false);
                   },
                 ),
               ),

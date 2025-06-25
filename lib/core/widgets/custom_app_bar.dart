@@ -32,9 +32,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 36.h,
             fit: BoxFit.contain,
           ),
-          12.0.width,
+
           Text(
-            LocaleKeys.appname.tr(),
+            LocaleKeys.app_name.tr(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

@@ -13,17 +13,33 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../home/data/model/suit_model.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.suit});
 
   final SuitModel suit;
 
   @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late String selectedSize;
+  late Color selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedSize = widget.suit.availableSizes.first;
+    selectedColor = widget.suit.availableColors.first;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final colors = [Colors.black, Colors.brown, Colors.blueGrey];
-    final sizes = ['S', 'M', 'L', 'XL'];
+    final colors = widget.suit.availableColors;
+    final sizes = widget.suit.availableSizes;
+
     final images = [
-      suit.image,
+      widget.suit.image,
     ]; // If multiple images exist, extend model later.
     final pageController = PageController();
 
@@ -52,10 +68,12 @@ class ProductDetailsScreen extends StatelessWidget {
                 top: 40,
                 right: 16,
                 child: CustomCircleIcon(
-                  color: suit.isFavorite ? Colors.red : Colors.grey,
+                  color: widget.suit.isFavorite ? Colors.red : Colors.grey,
                   size: 30,
                   icon:
-                      suit.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      widget.suit.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                   onTap: () {},
                 ),
               ),
@@ -89,12 +107,12 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(suit.name, style: Styles.font20W600),
+                    Text(widget.suit.name, style: Styles.font20W600),
                     8.0.height,
-                    Text(suit.brand, style: Styles.font14W400),
+                    Text(widget.suit.brand, style: Styles.font14W400),
                     12.0.height,
                     Text(
-                      'EGP ${suit.price}',
+                      'EGP ${widget.suit.price}',
                       style: Styles.font20W600.copyWith(color: Colors.black),
                     ),
                     10.0.height,
@@ -105,11 +123,12 @@ class ProductDetailsScreen extends StatelessWidget {
                           size: 18,
                           color: Colors.black,
                         ),
-                        const SizedBox(width: 4),
+                        4.0.width,
                         Text(
                           LocaleKeys.rental_price.tr(
                             namedArgs: {
-                              'price': (suit.price * 0.12).toStringAsFixed(0),
+                              'price': (widget.suit.price * 0.12)
+                                  .toStringAsFixed(0),
                             },
                           ),
                           style: Styles.font14W400.copyWith(
@@ -120,7 +139,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     16.0.height,
                     Text(
-                      suit.type,
+                      widget.suit.type,
                       style: Styles.font14W400.copyWith(
                         color: Colors.grey.shade600,
                       ),
@@ -131,11 +150,23 @@ class ProductDetailsScreen extends StatelessWidget {
                       style: Styles.font16W500,
                     ),
                     9.0.height,
-                    ColorSelector(colors: colors),
+                    ColorSelector(
+                      colors: widget.suit.availableColors,
+                      selectedColor: selectedColor,
+                      onColorSelected: (color) {
+                        setState(() => selectedColor = color);
+                      },
+                    ),
                     25.0.height,
                     Text(LocaleKeys.select_size.tr(), style: Styles.font16W500),
                     8.0.height,
-                    SizeSelector(sizes: sizes),
+                    SizeSelector(
+                      sizes: widget.suit.availableSizes,
+                      selectedSize: selectedSize,
+                      onSizeSelected: (size) {
+                        setState(() => selectedSize = size);
+                      },
+                    ),
                     25.0.height,
                     Row(
                       children: [
@@ -148,7 +179,11 @@ class ProductDetailsScreen extends StatelessWidget {
                             onPressed: () {
                               context.pushNamed(
                                 Routes.purchaseScreen,
-                                arguments: suit,
+                                arguments: {
+                                  'suit': widget.suit,
+                                  'selectedSize': selectedSize,
+                                  'selectedColor': selectedColor,
+                                },
                               );
                             },
                           ),
@@ -161,7 +196,14 @@ class ProductDetailsScreen extends StatelessWidget {
                             text: LocaleKeys.rent_now.tr(),
                             textColor: Colors.white,
                             onPressed: () {
-                              context.pushNamed(Routes.rental, arguments: suit);
+                              context.pushNamed(
+                                Routes.rental,
+                                arguments: {
+                                  'suit': widget.suit,
+                                  'selectedSize': selectedSize,
+                                  'selectedColor': selectedColor,
+                                },
+                              );
                             },
                           ),
                         ),

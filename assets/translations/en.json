@@ -44,6 +44,13 @@
   "total_price": "Total Price",
   "confirm_rental": "Confirm Rental",
     "change_language": "Change Language"
-    , "profile": "Profile"
+    , "profile": "Profile",
+  "days": "day(s)",
+  "color": "Color",
+"size": "Size",
+"add_to_cart" : "Add To Cart",
+ "no_items_found"  :  "No Items Found"
+
+
 
 }
