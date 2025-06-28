@@ -56,11 +56,23 @@ class LocaleKeys {
   static const confirm_rental = 'confirm_rental';
   static const start_date = 'start_date';
   static const rental_duration = 'rental_duration';
-  static const price_per_day = 'price_per_day';
-  static const rental_confirmed = 'rental_confirmed';
+  static const price_per_day = 'Price Per Day';
+  static const rental_confirmed = 'Rental Confirmed';
   static const days = 'days';
   static const color = 'color';
   static const size = 'size';
   static const add_to_cart = 'add_to_cart';
   static const no_items_found = 'no_items_found';
+  static const price = 'price';
+  static const filter_serch = 'filter_serch';
+  static const confirm_filter = 'confirm_filter';
+  static const rental = 'rental';
+  static const purchase = 'purchase';
+  static const audience = 'audience';
+  static const audience_male = 'audience_male';
+  static const audience_child = 'audience_child';
+
+  static const transaction = 'transaction';
+  static const transaction_rent = 'transaction_rent';
+  static const transaction_sale = 'transaction_sale';
 }

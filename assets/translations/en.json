@@ -49,7 +49,24 @@
   "color": "Color",
 "size": "Size",
 "add_to_cart" : "Add To Cart",
- "no_items_found"  :  "No Items Found"
+ "no_items_found"  :  "No Items Found",
+ "price": "Price",
+ "filter_serch": "Filter Search",
+ "confirm_filter": "Confirm Filter",
+ "purchase": "Purchase",
+ "rental": "Rental",
+"select_color": "Select Color",
+"select_size": "Select Size",
+  "audience": "Audience",
+  "audience_male": "Men",
+  "audience_child":"Kids",
+
+  "transaction":"Type",
+  "transaction_rent": "Rent",
+  "transaction_sale": "Sale"
+
+
+
 
 
 

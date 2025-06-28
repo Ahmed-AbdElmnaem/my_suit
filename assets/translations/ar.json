@@ -57,7 +57,20 @@
   "color": "اللون",
   "size": "المقاس"
   , "add_to_cart": "أضف إلى السلة",
-    "no_items_found"  :  "لا يوجد منتجات"
+    "no_items_found"  :  "لا يوجد منتجات",
+    "price"  :  "السعر",
+    "filter_serch"  :  "فلاتر البحث",
+    "confirm_filter": "تطبيق الفلاتر",
+    "purchase": "الشراء",
+    "rental": "الإيجار",
+      "audience":          "الفئة",
+  "audience_male":     "رجالي",
+  "audience_child":    "أطفال",
+
+  "transaction":       "النوع",
+  "transaction_rent":  "إيجار",
+  "transaction_sale":  "بيع"
+
 
 
 }

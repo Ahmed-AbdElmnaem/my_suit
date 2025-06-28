@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:my_suit/core/constance/constance.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
 import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/routing/routes.dart';
@@ -10,6 +11,7 @@ import 'package:my_suit/features/home/data/model/suit_model.dart';
 import 'package:my_suit/features/home/ui/widget/category_item.dart';
 import 'package:my_suit/features/home/ui/widget/custom_carousel_slider.dart';
 import 'package:my_suit/features/home/ui/widget/custom_drawer.dart';
+import 'package:my_suit/features/home/ui/widget/custom_fliter_bottom_sheet.dart';
 import 'package:my_suit/features/home/ui/widget/suit_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -159,12 +161,24 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       16.0.height,
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10.0,
+                        ),
                         child: AppTextFormField(
                           hintStyle: const TextStyle(color: Colors.black54),
-                          suffixIcon: const Icon(Icons.search),
                           backgroundColor: Colors.grey[200],
                           hintText: LocaleKeys.search_hint.tr(),
+                          prefixIcon: GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (_) => const FilterBottomSheet(),
+                              );
+                            },
+                            child: Image.asset(Constance.imageFilter),
+                          ),
+                          suffixIcon: const Icon(Icons.search),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return LocaleKeys.search_validator.tr();
