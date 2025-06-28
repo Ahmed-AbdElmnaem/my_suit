@@ -45,6 +45,7 @@
   "confirm_rental": "Confirm Rental",
     "change_language": "Change Language"
     , "profile": "Profile",
+    "rental_price": "Rental: {price} EGP / day",
   "days": "day(s)",
   "color": "Color",
 "size": "Size",
@@ -60,10 +61,14 @@
   "audience": "Audience",
   "audience_male": "Men",
   "audience_child":"Kids",
-
   "transaction":"Type",
   "transaction_rent": "Rent",
-  "transaction_sale": "Sale"
+  "transaction_sale": "Sale",
+  "buy_now": "Buy Now",
+  "rent_now": "Rent Now"
+
+ 
+
 
 
 

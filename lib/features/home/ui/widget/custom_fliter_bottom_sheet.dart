@@ -90,6 +90,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 _buildCategorySection(),
                 34.0.height,
                 _buildApplyButton(),
+                14.0.height,
               ],
             ),
           ),

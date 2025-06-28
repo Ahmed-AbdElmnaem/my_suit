@@ -14,6 +14,10 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>my_suit</string>
+	<key>NSCameraUsageDescription</key>
+	<string>نحتاج الوصول للكاميرا لالتقاط صورة البروفايل.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>نحتاج الوصول للمعرض لاختيار صورة البروفايل.</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

@@ -54,12 +54,6 @@ class ProfileScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            6.0.width,
-                            const Icon(
-                              Icons.edit,
-                              size: 18,
-                              color: Colors.white70,
-                            ),
                           ],
                         ),
                         8.0.height,
@@ -74,7 +68,15 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const CustomCircleImage(),
+                  Stack(
+                    children: [
+                      PickableCircleImage(
+                        placeholderUrl:
+                            'https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg',
+                        radius: 60,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],

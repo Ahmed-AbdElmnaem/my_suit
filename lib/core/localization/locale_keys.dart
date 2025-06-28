@@ -71,7 +71,6 @@ class LocaleKeys {
   static const audience = 'audience';
   static const audience_male = 'audience_male';
   static const audience_child = 'audience_child';
-
   static const transaction = 'transaction';
   static const transaction_rent = 'transaction_rent';
   static const transaction_sale = 'transaction_sale';

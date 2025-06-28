@@ -1,27 +1,59 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+// lib/widgets/pickable_circle_image.dart
+import 'dart:io';
 
-class CustomCircleImage extends StatelessWidget {
-  const CustomCircleImage({super.key});
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class PickableCircleImage extends StatefulWidget {
+  final String placeholderUrl;
+
+  final double radius;
+
+  const PickableCircleImage({
+    super.key,
+    required this.placeholderUrl,
+    this.radius = 60,
+  });
+
+  @override
+  State<PickableCircleImage> createState() => _PickableCircleImageState();
+}
+
+class _PickableCircleImageState extends State<PickableCircleImage> {
+  final ImagePicker _picker = ImagePicker();
+  File? _pickedFile;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final XFile? file = await _picker.pickImage(
+      source: source,
+      imageQuality: 85,
+    );
+    if (file != null) setState(() => _pickedFile = File(file.path));
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-        border: Border.all(color: Colors.white, width: 4),
-      ),
-      child: const CircleAvatar(
-        radius: 60,
-        backgroundImage: CachedNetworkImageProvider(
-          'https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg',
+    return GestureDetector(
+      onTap: () => _pickImage(ImageSource.gallery),
+      onLongPress: () => _pickImage(ImageSource.camera),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white, width: 4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: CircleAvatar(
+          radius: widget.radius,
+          backgroundImage:
+              _pickedFile != null
+                  ? FileImage(_pickedFile!) as ImageProvider
+                  : NetworkImage(widget.placeholderUrl),
         ),
       ),
     );
