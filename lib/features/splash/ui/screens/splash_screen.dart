@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     Future.delayed(const Duration(milliseconds: 3500), () {
-      context.pushReplacementNamed(Routes.onboarding);
+      context.pushReplacementNamed(Routes.layout);
     });
   }
 
