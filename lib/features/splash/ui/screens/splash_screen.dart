@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/routing/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -61,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     Future.delayed(const Duration(milliseconds: 3500), () {
-      context.pushReplacementNamed(Routes.layout);
+      context.pushReplacementNamed(Routes.onboarding);
     });
   }
 
@@ -89,8 +91,8 @@ class _SplashScreenState extends State<SplashScreen>
                     scale: _logoScaleAnimation.value,
                     child: Image.asset(
                       "assets/images/png/logo.png",
-                      width: 250.w,
-                      height: 250.h,
+                      width: 190.w,
+                      height: 190.h,
                     ),
                   ),
                 );
@@ -105,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
                   child: SlideTransition(
                     position: _textSlideAnimation,
                     child: Text(
-                      "MySuit",
+                      LocaleKeys.app_name.tr(),
                       style: TextStyle(
                         fontSize: 28.sp,
                         color: Colors.white,

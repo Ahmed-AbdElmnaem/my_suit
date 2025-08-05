@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
+import 'package:my_suit/core/routing/routes.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
 import 'package:my_suit/core/widgets/custom_circle_Icon.dart';
@@ -8,17 +11,36 @@ import 'package:my_suit/features/product_details/ui/widgets/image_slider.dart';
 import 'package:my_suit/features/product_details/ui/widgets/size_selector.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
+import '../../../home/data/model/suit_model.dart';
+
+class ProductDetailsScreen extends StatefulWidget {
+  const ProductDetailsScreen({super.key, required this.suit});
+
+  final SuitModel suit;
+
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late String selectedSize;
+  late Color selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedSize = widget.suit.availableSizes.first;
+    selectedColor = widget.suit.availableColors.first;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final colors = [Colors.black, Colors.brown, Colors.blueGrey];
-    final sizes = ['S', 'M', 'L', 'XL'];
+    final colors = widget.suit.availableColors;
+    final sizes = widget.suit.availableSizes;
+
     final images = [
-      'https://i.pinimg.com/736x/5d/36/ab/5d36ab81838f9debbbc6035b44327e1c.jpg',
-      'https://i.pinimg.com/736x/bf/e9/28/bfe928a68fd3fee348909f1bdf6d5419.jpg',
-    ];
+      widget.suit.image,
+    ]; // If multiple images exist, extend model later.
     final pageController = PageController();
 
     return Scaffold(
@@ -32,27 +54,29 @@ class ProductDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ImageSlider(images: images, controller: pageController),
               ),
-
-              // Back button
               Positioned(
                 top: 40,
                 left: 16,
                 child: CustomCircleIcon(
+                  size: 30,
+                  color: Colors.white,
                   icon: Icons.arrow_back_ios_new,
                   onTap: () => Navigator.pop(context),
                 ),
               ),
-
-              // Favorite icon
               Positioned(
                 top: 40,
                 right: 16,
                 child: CustomCircleIcon(
-                  icon: Icons.favorite_border,
+                  color: widget.suit.isFavorite ? Colors.red : Colors.grey,
+                  size: 30,
+                  icon:
+                      widget.suit.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                   onTap: () {},
                 ),
               ),
-
               Positioned(
                 bottom: 20,
                 left: 0,
@@ -67,20 +91,11 @@ class ProductDetailsScreen extends StatelessWidget {
                       dotHeight: 10,
                       dotWidth: 10,
                     ),
-                    onDotClicked: (index) {
-                      pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    },
                   ),
                 ),
               ),
             ],
           ),
-
-          // Bottom content
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -92,53 +107,107 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('2-Piece Slim Fit Suit', style: Styles.font20W600),
-                    const SizedBox(height: 8),
-
+                    Text(widget.suit.name, style: Styles.font20W600),
+                    8.0.height,
+                    Text(widget.suit.brand, style: Styles.font14W400),
+                    12.0.height,
+                    Text(
+                      'EGP ${widget.suit.price}',
+                      style: Styles.font20W600.copyWith(color: Colors.black),
+                    ),
+                    10.0.height,
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 20),
-                        6.0.height,
-                        Text('4.5', style: Styles.font14W400),
-                        const SizedBox(width: 6),
+                        const Icon(
+                          Icons.access_time,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                        4.0.width,
                         Text(
-                          '(210 reviews)',
-                          style: Styles.font14W400.copyWith(color: Colors.grey),
+                          LocaleKeys.rental_price.tr(
+                            namedArgs: {
+                              'price': (widget.suit.price * 0.12)
+                                  .toStringAsFixed(0),
+                            },
+                          ),
+                          style: Styles.font14W400.copyWith(
+                            color: Colors.grey.shade600,
+                          ),
                         ),
                       ],
                     ),
-                    12.0.height,
-                    Text(
-                      'EGP 2,990',
-                      style: Styles.font20W600.copyWith(color: Colors.brown),
-                    ),
                     16.0.height,
-
                     Text(
-                      'A classy slim fit suit perfect for formal occasions.',
+                      widget.suit.type,
                       style: Styles.font14W400.copyWith(
                         color: Colors.grey.shade600,
                       ),
                     ),
                     23.0.height,
-                    Text('Select Color', style: Styles.font16W500),
+                    Text(
+                      LocaleKeys.select_color.tr(),
+                      style: Styles.font16W500,
+                    ),
                     9.0.height,
-                    ColorSelector(colors: colors),
+                    ColorSelector(
+                      colors: widget.suit.availableColors,
+                      selectedColor: selectedColor,
+                      onColorSelected: (color) {
+                        setState(() => selectedColor = color);
+                      },
+                    ),
                     25.0.height,
-                    Text('Select Size', style: Styles.font16W500),
+                    Text(LocaleKeys.select_size.tr(), style: Styles.font16W500),
                     8.0.height,
-                    SizeSelector(sizes: sizes),
+                    SizeSelector(
+                      sizes: widget.suit.availableSizes,
+                      selectedSize: selectedSize,
+                      onSizeSelected: (size) {
+                        setState(() => selectedSize = size);
+                      },
+                    ),
                     25.0.height,
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: CustomButton(
-                        icon: Icons.shopping_cart_outlined,
-                        backgroundColor: Colors.black,
-                        text: 'Add to Cart',
-                        textColor: Colors.white,
-                        onPressed: () {},
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            icon: Icons.shopping_bag_outlined,
+                            backgroundColor: Colors.black,
+                            text: LocaleKeys.buy_now.tr(),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              context.pushNamed(
+                                Routes.purchaseScreen,
+                                arguments: {
+                                  'suit': widget.suit,
+                                  'selectedSize': selectedSize,
+                                  'selectedColor': selectedColor,
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        12.0.width,
+                        Expanded(
+                          child: CustomButton(
+                            icon: Icons.calendar_month_outlined,
+                            backgroundColor: Colors.grey.shade700,
+                            text: LocaleKeys.rent_now.tr(),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              context.pushNamed(
+                                Routes.rental,
+                                arguments: {
+                                  'suit': widget.suit,
+                                  'selectedSize': selectedSize,
+                                  'selectedColor': selectedColor,
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_suit/core/helpers/extensions.dart';
+import 'package:my_suit/core/localization/locale_keys.dart';
 import 'package:my_suit/core/theming/styles.dart';
 import 'package:my_suit/core/widgets/custom_button.dart';
 import 'package:my_suit/core/widgets/custom_text_field.dart';
@@ -85,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           30.0.height,
                           Text(
-                            "إنشاء حساب جديد",
+                            LocaleKeys.register_title.tr(),
                             style: Styles.font24W600.copyWith(
                               color: Colors.white,
                             ),
@@ -93,22 +95,21 @@ class _RegisterScreenState extends State<RegisterScreen>
                           ),
                           10.0.height,
                           Text(
-                            "املأ البيانات لإنشاء حسابك",
+                            LocaleKeys.register_subtitle.tr(),
                             style: Styles.font16W400.copyWith(
                               color: Colors.white70,
                             ),
                             textAlign: TextAlign.center,
                           ),
                           40.0.height,
-
                           AppTextFormField(
                             controller: nameController,
-                            hintText: "الاسم الكامل",
+                            hintText: LocaleKeys.full_name_hint.tr(),
                             keyboardType: TextInputType.name,
                             validator:
                                 (value) =>
                                     value!.isEmpty
-                                        ? "من فضلك أدخل اسمك الكامل"
+                                        ? LocaleKeys.full_name_validator.tr()
                                         : null,
                             prefixIcon: const Icon(
                               Icons.person,
@@ -118,12 +119,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                           20.0.height,
                           AppTextFormField(
                             controller: emailController,
-                            hintText: "البريد الإلكتروني",
+                            hintText: LocaleKeys.email_hint.tr(),
                             keyboardType: TextInputType.emailAddress,
                             validator:
                                 (value) =>
                                     value!.isEmpty
-                                        ? "من فضلك أدخل بريدك الإلكتروني"
+                                        ? LocaleKeys.email_validator.tr()
                                         : null,
                             prefixIcon: const Icon(
                               Icons.email_outlined,
@@ -131,49 +132,48 @@ class _RegisterScreenState extends State<RegisterScreen>
                             ),
                           ),
                           20.0.height,
-
                           AppTextFormField(
                             controller: passwordController,
-                            hintText: "كلمة المرور",
+                            hintText: LocaleKeys.password_hint.tr(),
                             obsecureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             validator:
                                 (value) =>
                                     value!.isEmpty
-                                        ? "من فضلك أدخل كلمة المرور"
+                                        ? LocaleKeys.password_validator.tr()
                                         : null,
                           ),
                           20.0.height,
-
                           AppTextFormField(
                             controller: confirmPasswordController,
-                            hintText: "تأكيد كلمة المرور",
+                            hintText: LocaleKeys.confirm_password_hint.tr(),
                             obsecureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "من فضلك أدخل تأكيد كلمة المرور";
+                                return LocaleKeys.confirm_password_validator
+                                    .tr();
                               } else if (value != passwordController.text) {
-                                return "كلمتا المرور غير متطابقتين";
+                                return LocaleKeys.passwords_not_matching.tr();
                               }
                               return null;
                             },
                           ),
                           30.0.height,
-
                           CustomButton(
-                            text: "إنشاء الحساب",
+                            text: LocaleKeys.create_account.tr(),
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {}
+                              if (formKey.currentState!.validate()) {
+                                // sign up logic
+                              }
                             },
                           ),
                           20.0.height,
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "عندك حساب؟",
+                                LocaleKeys.have_account.tr(),
                                 style: Styles.font14W400.copyWith(
                                   color: Colors.white70,
                                 ),
@@ -183,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   context.pop();
                                 },
                                 child: Text(
-                                  "سجل الدخول",
+                                  LocaleKeys.login.tr(),
                                   style: Styles.font14W400.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,

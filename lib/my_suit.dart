@@ -1,3 +1,6 @@
+import 'dart:ui' as ui;
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_suit/core/routing/app_router.dart';
@@ -13,17 +16,26 @@ class MySuit extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData(
-        fontFamily: 'Urbanist',
+        fontFamily: 'Amiri',
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      locale: const Locale('ar'),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouter.onGenerateRoute,
       initialRoute: Routes.splash,
       builder: (context, widget) {
         ScreenUtil.init(context);
-        return Directionality(textDirection: TextDirection.rtl, child: widget!);
+
+        return Directionality(
+          textDirection:
+              context.locale.languageCode == 'ar'
+                  ? ui.TextDirection.rtl
+                  : ui.TextDirection.ltr,
+          child: widget!,
+        );
       },
     );
   }
